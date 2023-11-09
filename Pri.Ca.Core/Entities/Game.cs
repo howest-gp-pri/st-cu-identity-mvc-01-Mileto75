@@ -12,6 +12,9 @@ namespace Pri.Ca.Core.Entities
         public string Description { get; set; }
         public Publisher Publisher { get; set; }
         public int PublisherId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        //unshadowed foreign key must be string for default identity
+        public string ApplicationUserId { get; set; }
         public ICollection<Genre> Genres { get; set; }
     }
 }

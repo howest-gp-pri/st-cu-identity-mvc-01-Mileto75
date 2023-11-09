@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pri.Ca.Core.Entities;
 using Pri.Ca.Core.Interfaces;
@@ -18,10 +19,11 @@ namespace Pri.Ca.Web.Controllers
             _gameService = gameService;
         }
 
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> Index()
         {
             var result = await _gameService.GetAllAsync();
-            
+            var user = User;
             var gamesIndexViewModel = new GamesIndexViewModel
             {
                 Games = result.Items.Select(g => new BaseViewModel 
@@ -32,6 +34,7 @@ namespace Pri.Ca.Web.Controllers
             };            
             return View(gamesIndexViewModel);
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Info(int id)
         {
             var result = await _gameService.GetByIdAsync(id);

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pri.Ca.Core.Entities;
 using Pri.Ca.Core.Interfaces;
@@ -19,6 +20,28 @@ namespace Pri.Ca.Web
                 options => options
                 .UseSqlServer(builder.Configuration.GetConnectionString("GamesDb"))
                 );
+            //register identity service
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+                options => 
+                {
+                    //only for development testing purposes!
+                    options.Password.RequiredUniqueChars = 0;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 4;
+                }
+                )
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.ConfigureApplicationCookie(
+                options =>
+                {
+                    options.LoginPath = "/account/login";
+                    options.LogoutPath = "/account/logout";
+                    options.AccessDeniedPath = "/account/accessdenied";
+                }
+                );
             builder.Services.AddScoped<IGameRepository, GameRepository>();
             builder.Services.AddScoped<IGenreRepository, GenreRepository>();
             builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
@@ -39,7 +62,7 @@ namespace Pri.Ca.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
