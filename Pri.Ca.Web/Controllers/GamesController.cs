@@ -19,7 +19,8 @@ namespace Pri.Ca.Web.Controllers
             _gameService = gameService;
         }
 
-        [Authorize(Roles = "Admin,User")]
+
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             var result = await _gameService.GetAllAsync();

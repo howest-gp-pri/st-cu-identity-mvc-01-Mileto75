@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pri.Ca.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using Pri.Ca.Infrastructure.Data;
 namespace Pri.Ca.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231109174331_users")]
+    partial class users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,22 +91,6 @@ namespace Pri.Ca.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            ConcurrencyStamp = "17886775-76f7-4c34-84bd-6aa122343a69",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            ConcurrencyStamp = "dee104b0-7836-4209-a1db-49fe9c258d50",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -192,18 +178,6 @@ namespace Pri.Ca.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "1",
-                            RoleId = "1"
-                        },
-                        new
-                        {
-                            UserId = "2",
-                            RoleId = "2"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -308,7 +282,7 @@ namespace Pri.Ca.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GAMES.COM",
                             NormalizedUserName = "ADMIN@GAMES.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK+cRat4FNzMU1gglv4mq8/bYAmmwdK9Wn9+0MSSUJo+msKnVR0my842x+zHgTVw+g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPY03bxE9+6qsrRzYUfVSxqEEVpbJZaF/FidQZx+qwhhQ7m//0BBMkMceMfZ1bTWbw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "00000000-0000-0000-0000-000000000000",
                             TwoFactorEnabled = false,
@@ -326,7 +300,7 @@ namespace Pri.Ca.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@GAMES.COM",
                             NormalizedUserName = "USER@GAMES.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENPoe17b/l3XR4UFGbOKy7kGA84FdY83u89Eem2WLwvFkbsMJmX52lrontM9CGO/Gg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAaNLqHd4Wsi6i8heEKr6ihT/7EWYS6K+dRFGh8hUUpGyi3rg2BQKK9RIGCJvrfKFQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "00000000-0000-0000-0000-000000000000",
                             TwoFactorEnabled = false,
